@@ -20,7 +20,7 @@
 
 - Real-time Now Playing info (track, artist, album, app)
 - Volume control and playback control from Home Assistant
-- MQTT Discovery - automatically appears in Home Assistant
+- Works with any audio source (Apple Music, Spotify, YouTube, etc.)
 - Lightweight menu bar app, no dock icon
 
 ## Use Case: Voice Assistant Audio Ducking
@@ -34,6 +34,7 @@ Use the [HA Voice room MP volume blueprint](https://my.home-assistant.io/redirec
 - macOS 13.0+
 - [media-control](https://github.com/ungive/mediaremote-adapter) CLI tool
 - MQTT broker (e.g., Home Assistant MQTT add-on)
+- [MQTT Media Player](https://github.com/bkbilly/mqtt_media_player) HACS integration (HA doesn't natively support MQTT discovery for media_player)
 
 ## Installation
 
@@ -56,18 +57,20 @@ cd ha-mac-media-player
 ./scripts/install.sh
 ```
 
-## Configuration
+## Home Assistant Setup
+
+1. Install [MQTT Media Player](https://github.com/bkbilly/mqtt_media_player) via HACS
+2. Restart Home Assistant
+
+## App Configuration
 
 1. Click the menu bar icon
 2. Select "Preferences..."
 3. Enter your MQTT broker details (host, port, username/password)
 4. Click Connect
 
-The app will automatically publish a discovery config to Home Assistant.
+The media_player entity will appear in Home Assistant:
 
-## Home Assistant Entity
-
-Once connected, a new entity appears:
 
 ```
 media_player.mac_media_player_<hostname>
