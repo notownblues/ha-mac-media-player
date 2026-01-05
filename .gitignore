@@ -1,0 +1,57 @@
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+*.xcscheme
+DerivedData/
+*.moved-aside
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.xcscheme
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Build outputs
+build/
+*.app
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# CocoaPods (if used)
+Pods/
+Podfile.lock
+
+# Carthage (if used)
+Carthage/Build/
+Carthage/Checkouts/
+
+# IDE
+*.idea/
+*.vscode/
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Archives
+*.zip
+*.tar.gz
+
+# Sensitive files
+*.env
+*.pem
+*.p12
