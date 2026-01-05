@@ -10,8 +10,10 @@
 
 <p align="center">
   <img src="mac_media_player-app-preview.png" alt="MacMediaPlayer App" width="280">
-  &nbsp;&nbsp;&nbsp;
-  <img src="mac_media_player-preview.png" alt="Home Assistant Media Player" width="280">
+</p>
+
+<p align="center">
+  <img src="mac_media_player-preview.png" alt="Home Assistant Media Player" width="364">
 </p>
 
 ## Features

@@ -168,9 +168,9 @@ struct PreferencesWindow: View {
             Spacer()
 
             HStack {
-                Link("GitHub", destination: URL(string: "https://github.com/")!)
+                Link("GitHub", destination: URL(string: "https://github.com/notownblues/ha-mac-media-player")!)
                 Text("•")
-                Link("Report Issue", destination: URL(string: "https://github.com/")!)
+                Link("Report Issue", destination: URL(string: "https://github.com/notownblues/ha-mac-media-player/issues")!)
             }
             .font(.caption)
         }
