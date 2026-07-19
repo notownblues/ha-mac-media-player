@@ -45,6 +45,9 @@ brew tap notownblues/ha-mac-media-player
 brew install --cask macmediaplayer
 ```
 
+> If Homebrew refuses to load the cask from an "untrusted tap", run
+> `brew trust notownblues/ha-mac-media-player` once, then install.
+
 This installs `MacMediaPlayer.app` into `/Applications` and automatically pulls in
 the required [`media-control`](https://formulae.brew.sh/formula/media-control)
 dependency.
