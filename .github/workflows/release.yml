@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g. 1.0.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Releasing version $VERSION"
+
+      - name: Build and package
+        id: package
+        run: |
+          ./scripts/build-release.sh "${{ steps.version.outputs.version }}"
+          ZIP=".build/release/MacMediaPlayer-${{ steps.version.outputs.version }}.zip"
+          echo "zip=$ZIP" >> "$GITHUB_OUTPUT"
+          echo "sha256=$(shasum -a 256 "$ZIP" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: MacMediaPlayer ${{ steps.version.outputs.version }}
+          files: ${{ steps.package.outputs.zip }}
+          generate_release_notes: true
+          body: |
+            ## Install via Homebrew
+
+            ```bash
+            brew tap notownblues/ha-mac-media-player
+            brew install --cask macmediaplayer
+            ```
+
+            Cask sha256: `${{ steps.package.outputs.sha256 }}`
+
+      - name: Bump cask in tap repo
+        if: env.TAP_REPO_TOKEN != ''
+        env:
+          TAP_REPO_TOKEN: ${{ secrets.TAP_REPO_TOKEN }}
+        run: |
+          ./scripts/update-cask.sh \
+            "${{ steps.version.outputs.version }}" \
+            "${{ steps.package.outputs.sha256 }}"

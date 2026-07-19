@@ -42,12 +42,16 @@ Use the [HA Voice room MP volume blueprint](https://my.home-assistant.io/redirec
 
 ```bash
 brew tap notownblues/ha-mac-media-player
-brew install macmediaplayer
-
-# Install required dependency
-brew tap ungive/media-control
-brew install media-control
+brew install --cask macmediaplayer
 ```
+
+This installs `MacMediaPlayer.app` into `/Applications` and automatically pulls in
+the required [`media-control`](https://formulae.brew.sh/formula/media-control)
+dependency.
+
+> The app is ad-hoc signed (not notarized). On first launch, right-click it in
+> `/Applications` → **Open** → **Open**, or run
+> `xattr -dr com.apple.quarantine /Applications/MacMediaPlayer.app`.
 
 ### From Source
 
